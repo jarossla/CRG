@@ -112,7 +112,7 @@ void eraseCar() {
 // URCUJE PRESNOST KOLIZIE AUTA S ENEMY
 int collision() {
 	if (enemyY[0] + 5 >= 40) {
-		if (enemyX[0] + 2 - carPos >= 0 && enemyX[0] + 2 - carPos < 5) {
+		if (enemyX[0] + 3 - carPos >= 0 && enemyX[0] + 3 - carPos < 5) {
 			return 1;
 		}
 	}
