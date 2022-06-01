@@ -73,6 +73,13 @@ class Snake:
         self.y.append(-1)
 
 
+def is_collision(x1, y1, x2, y2):
+    if x1 >= x2 and x1 < x2 + SIZE:
+        if y1 >= y2 and y1 < y2 + SIZE:
+            return True
+    return False
+
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -90,13 +97,6 @@ class Game:
         self.snake = Snake(self.surface)
         self.apple = Apple(self.surface)
 
-    @staticmethod
-    def is_collision(x1, y1, x2, y2):
-        if x1 >= x1 < x2 + SIZE:
-            if y2 <= y1 < y2 + SIZE:
-                return True
-        return False
-
     def render_background(self):
         bg = pygame.image.load("background.jpg")
         self.surface.blit(bg, (0, 0))
@@ -108,12 +108,12 @@ class Game:
         self.display_score()
         pygame.display.flip()
 
-        if self.is_collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y):
+        if is_collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y):
             self.snake.increase_length()
             self.apple.move()
 
         for i in range(3, self.snake.length):
-            if self.is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
+            if is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
                 raise "Collision Occurred"
 
     def display_score(self):
@@ -123,13 +123,15 @@ class Game:
 
     def show_game_over(self):
         self.render_background()
-        font = pygame.font.SysFont('algerian', 30)
-        line1 = font.render(f"Prehral si! Tvoje skóre je: {self.snake.length}", True, (0, 0, 255))
-        self.surface.blit(line1, (250, 300))
-        line2 = font.render("Stlač enter pre pokračovanie. ", True, (0, 0, 255))
-        self.surface.blit(line2, (250, 350))
-        line3 = font.render("Stlač eskape pre ukončenie. ", True, (0, 0, 255))
-        self.surface.blit(line3, (250, 400))
+        font = pygame.font.SysFont('times new roman', 40)
+        line1 = font.render(f"Prehral si! Tvoje najvyssie skore bolo: {self.snake.length}", True, (0, 0, 255))
+        self.surface.blit(line1, (200, 300))
+        font = pygame.font.SysFont('times new roman', 20)
+        line2 = font.render("Stlac enter pre pokracovanie. ", True, (0, 0, 0))
+        self.surface.blit(line2, (380, 350))
+        font = pygame.font.SysFont('times new roman', 20)
+        line3 = font.render("Stlac eskape pre ukoncenie. ", True, (0, 0, 0))
+        self.surface.blit(line3, (380, 370))
         pygame.display.flip()
 
     def run(self):
