@@ -28,7 +28,7 @@ class Snake:
         self.parent_screen = parent_screen
         self.image = pygame.image.load("block.jpg").convert()
         self.direction = 'down'
-
+        self.initBody = [[3 * SIZE, 40], [4 * SIZE, 40], [5 * SIZE, 40]]
         self.length = 1
         self.x = [40]
         self.y = [40]
@@ -83,7 +83,7 @@ def is_collision(x1, y1, x2, y2):
 class Game:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption("Code-basics Snake And Apple Game")
+        pygame.display.set_caption("SNAKE GAME")
 
         pygame.mixer.init()
 
